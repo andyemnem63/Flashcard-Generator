@@ -1,11 +1,18 @@
 var inquirer = require('inquirer');
-var card = require('./card');
-var basicData  = require('./basic');
+var basicCard = require('./basic');
+var clozeCard = require('./cloze');
 
+//Counter
 var count = 0;
+var correctCount = 0;
 
+// Create in instance of function basic(){} from card.js and assign it to basic quest
+var firstPresident = new basicCard('Who was the first president of the U.S', 'George Washington');
+var secondPresident = new basicCard('Who was the second president of the U.S', 'John Adams');
 
-//Ask user if they want to play game with BASIC or CLOZE flashcards
+var basicQuestion = [firstPresident.front , secondPresident.front];
+var basicAnswer = [firstPresident.back , secondPresident.back];
+// Ask user if they want to play game with BASIC or CLOZE flashcards
 inquirer.prompt([
 
 		{
@@ -16,38 +23,43 @@ inquirer.prompt([
 		}
 	
 	]).then(function(answer){
-
+		//If the users choice is basic....
 		if(answer.choice === 'Basic'){
-			console.log("=================================");
 			basic();
 		}
+		// If users answer is cloze.......
 		else if(answer.choice === 'Cloze'){
 			console.log('cloze');
 		}
 })
-
-//Ask questions for basic flashCards
-function basic(){
-	//Goes through 2 questions
-	if(count < 2) {
-		// Create in instance of function basic(){} from card.js and assign it to basic quest
-		var basicQuest = new card(basicData[count].front, basicData[count].back);
+// Ask questions for basic flashCards. Using recursion to repeat
+function basic() {
+	if(count < 2){
+		
 		inquirer.prompt([
 			{
 				type:'input',
-				name: 'question',
-				message: basicQuest.front
-			}
+				name: 'input',
+				message: basicQuestion[count]
+			},
 		])
 		.then(function(answer){
-			console.log(count);
-			//Adds 1 to counter so it goes to next question
+			console.log(1);
+			//Checks if users answer was correct
+			if(answer.input === basicAnswer[count]){
+				correctCount++;
+				console.log(true);
+			}
+			else{
+				console.log(false);
+			}
 			count++;
-			//Calls basic again to go to the next question
 			basic();
 		})
 	}
 	else{
-		//Do something
+		console.log('You got' ,correctCount, 'Right');
 	}
+
 }
+

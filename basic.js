@@ -1,14 +1,9 @@
-var basic = [
 
-		{
-			front: 'What is the color of the sky ?', 
-			back: 'blue' 
-		},
-		{
-			front:'What is the color of the sun ? ',
-			back: 'Yellow'
-		}
+//Constructor
+var basic = function(front, back) {
+		this.front = front;
+		this.back = back;
+	}	
 
-]
 
-module.exports = basic;
+module.exports = basic; 

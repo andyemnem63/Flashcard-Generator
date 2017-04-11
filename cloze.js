@@ -1,17 +1,6 @@
-var closeCard = [
+var cloze = function(text,cloze) {
+		this.text = text;
+		this.cloze = cloze;
+}
 
-	{
-		partial:'1. _________________ is a planet that has water',
-		cloze: 'Earth',
-		fullText: 'Earth is a planet that has water',
-
-	},
-	{
-		partial:'_________________ is the founder of spaceX',
-		cloze: 'Elon Musk',
-		fullText: 'Elon Musk is the founder of spaceX'
-	}
-	
-]
-
-module.exports = closeCard;
+module.exports = cloze;
